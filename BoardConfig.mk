@@ -26,7 +26,7 @@
 # Kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/golden
 TARGET_KERNEL_CONFIG := cyanogenmod_golden_defconfig
-TARGET_RECOVERY_FSTAB := device/samsung/codinalte/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/golden/rootdir/fstab.samsunggolden
 
 # Partitions
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1258291200
