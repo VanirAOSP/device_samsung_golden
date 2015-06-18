@@ -17,17 +17,11 @@
 #
 
 # SlimRoms specific overlay
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay/slim
-
-# Inherit GSM telephony parts
-$(call inherit-product, vendor/slim/config/gsm.mk)
+DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay/aosp
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
-
-# Inherit common Slim configurations
-$(call inherit-product, vendor/slim/config/common_full_phone.mk)
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
@@ -38,13 +32,7 @@ $(call inherit-product, device/samsung/golden/device.mk)
 # Device identifier
 PRODUCT_MODEL := GT-I8190
 PRODUCT_BRAND := samsung
-PRODUCT_NAME := slim_golden
+PRODUCT_NAME := full_golden
 PRODUCT_DEVICE := golden
 PRODUCT_MANUFACTURER := Samsung
 
-#Set build fingerprint / ID / Prduct Name ect.
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=goldenxx \
-    TARGET_DEVICE=golden \
-    PRIVATE_BUILD_DESC="goldenxx-user 4.1.2 JZO54K I8190XXAMG4 release-keys" \
-    BUILD_FINGERPRINT="samsung/goldenxx/golden:4.1.2/JZO54K/I8190XXAMG4:user/release-keys"

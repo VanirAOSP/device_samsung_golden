@@ -57,7 +57,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_PROVIDES_ENVIRON_RC := true
 
 # Kernel
-TARGET_KERNEL_CONFIG := slim_golden_defconfig
+TARGET_KERNEL_CONFIG := cyanogenmod_golden_defconfig
 TARGET_KERNEL_SOURCE := kernel/samsung/golden
 BOARD_CUSTOM_BOOTIMG_MK := device/samsung/golden/shbootimg.mk
 BOARD_KERNEL_CMDLINE := "androidboot.selinux=permissive"
@@ -147,6 +147,7 @@ BOARD_SEPOLICY_UNION += \
     vold.te \
     wpa_supplicant.te \
     zygote.te
+
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/golden/rootdir/fstab.samsunggolden

@@ -169,7 +169,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
 
 # Use U8500 opensource parts
-$(call inherit-product, hardware/u8500/u8500.mk)
+$(call inherit-product, hardware/samsung/u8500.mk)
 
 # Use the non-open-source parts, if they´re present
 $(call inherit-product, vendor/samsung/golden/golden-vendor.mk)
