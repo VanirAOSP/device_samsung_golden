@@ -162,6 +162,33 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
+# Audio
+PRODUCT_PACKAGES += \
+   libasound
+$(call inherit-product, hardware/samsung/u8500/libasound/alsa-lib-products.mk)
+
+# STE Display 
+PRODUCT_PACKAGES += \
+   lights.montblanc \
+   gralloc.montblanc \
+   hwcomposer.montblanc \
+   copybit.montblanc \
+   libblt_hw
+
+# STE Media
+PRODUCT_PACKAGES += \
+   libomxil-bellagio \
+   libstelpcutils
+
+# WLAN
+PRODUCT_PACKAGES += \
+   iw
+
+# External
+PRODUCT_PACKAGES += \
+   memtrack.montblanc
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.montblanc
+
 # We have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
