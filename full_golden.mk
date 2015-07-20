@@ -1,7 +1,5 @@
 #
-# Copyright (C) 2013 The Android Open Source Project
-# Copyright (C) 2013 Óliver García Albertos (oliverarafo@gmail.com)
-# Copyright (C) 2014 SlimRoms Project
+# Copyright (C) 2014 NovaFusion http://novafusion.pl
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,23 +14,25 @@
 # limitations under the License.
 #
 
-# SlimRoms specific overlay
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay/aosp
+# Get the long list of APNs
+PRODUCT_COPY_FILES := device/sample/etc/apns-full-conf.xml:system/etc/apns-conf.xml
+
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+# Device identifier
+PRODUCT_DEVICE := golden
+PRODUCT_NAME := golden
+PRODUCT_BRAND := samsung
+PRODUCT_MODEL := GT-I8190
+PRODUCT_MANUFACTURER := samsung
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 800
 TARGET_SCREEN_WIDTH := 480
 
-# Inherit from the common Open Source product configuration
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-
 # Inherit device configuration
 $(call inherit-product, device/samsung/golden/device.mk)
 
-# Device identifier
-PRODUCT_MODEL := GT-I8190
-PRODUCT_BRAND := samsung
-PRODUCT_NAME := full_golden
-PRODUCT_DEVICE := golden
-PRODUCT_MANUFACTURER := Samsung
+
 
