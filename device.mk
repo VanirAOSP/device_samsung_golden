@@ -32,6 +32,10 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
+# GPS
+
+PRODUCT_PROPERTY_OVERRIDES += ro.gps.init=true
+
 # Open-source HALs
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
