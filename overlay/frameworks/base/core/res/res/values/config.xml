@@ -110,4 +110,7 @@
         <item>com.google.android.gms/com.google.android.gms.update.SystemUpdateService$SecretCodeReceiver</item>
     </string-array>
 
+    <!-- Like every thing else about this device, RIL needs special accommodations -->
+    <bool translatable="false" name="config_telephony_pppUseClientIp">true</bool>
+
 </resources>
