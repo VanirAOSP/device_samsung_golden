@@ -18,22 +18,25 @@
 DEVICE_PACKAGE_OVERLAYS += device/samsung/golden/overlay
 
 # Define kind of DPI
-PRODUCT_AAPT_CONFIG := normal hdpi
+PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := hdpi
 
 # Hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Wi-Fi packages
+# Wifi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    $(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(LOCAL_PATH)/configs/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
 PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     dhcpcd.conf \
     wpa_supplicant \
-    wpa_supplicant.conf
+    libnetcmdiface
 
 # GPS
-
 PRODUCT_PROPERTY_OVERRIDES += ro.gps.init=true
 
 # Open-source HALs
@@ -100,9 +103,6 @@ PRODUCT_COPY_FILES += \
 
 # Get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/golden/golden-vendor.mk)
-
-# Wi-Fi config
-$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 # Dalvik config
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
