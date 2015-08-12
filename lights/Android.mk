@@ -1,6 +1,5 @@
-#
-# Copyright (C) 2014 Marcin Chojnacki marcinch7@gmail.com
-# Copyright (C) 2014 NovaFusion https://github.com/NovaFusion
+# Copyright (C) 2012 The Android Open Source Project
+# Copyright (C) 2013 Marcin Chojnacki
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,13 +12,17 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
 
 LOCAL_PATH:= $(call my-dir)
 
 # HAL module implemenation stored in
 # hw/<POWERS_HARDWARE_MODULE_ID>.<ro.hardware>.so
 include $(CLEAR_VARS)
+
+# Make backlight notification optional
+ifeq ($(BOARD_USE_BLN),true)
+LOCAL_CFLAGS += -DUSE_BLN
+endif
 
 LOCAL_SRC_FILES := lights.c
 LOCAL_PRELINK_MODULE := false

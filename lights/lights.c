@@ -1,7 +1,6 @@
 /*
- * Copyright (C) 2014 Marcin Chojnacki marcinch7@gmail.com
- * Copyright (C) 2014 NovaFusion https://github.com/NovaFusion
  * Copyright (C) 2012 The Android Open Source Project
+ * Copyright (C) 2013 Marcin Chojnacki
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +36,10 @@ static pthread_mutex_t g_lock = PTHREAD_MUTEX_INITIALIZER;
 /** Paths to light files **/
 char const *const BACKLIGHT_FILE = "/sys/class/backlight/panel/brightness";
 char const *const BUTTON_FILE = "/sys/class/leds/button-backlight/brightness";
-char const *const NOTIFICATION_FILE = "/sys/class/misc/backlightnotification/notification_led";
+
+#ifdef USE_BLN
+char const*const NOTIFICATION_FILE = "/sys/class/misc/backlightnotification/notification_led";
+#endif
 
 /** Write integer to file **/
 static int write_int(char const *path, int value)
@@ -97,6 +99,7 @@ static int set_light_buttons(struct light_device_t* dev, struct light_state_t co
     return err;
 }
 
+#ifdef USE_BLN
 /** Set buttons backlight as BLN **/
 static int set_light_notifications(struct light_device_t* dev, struct light_state_t const* state)
 {
@@ -109,6 +112,7 @@ static int set_light_notifications(struct light_device_t* dev, struct light_stat
     pthread_mutex_unlock (&g_lock);
     return err;
 }
+#endif
 
 /** Close the lights device */
 static int close_lights(struct light_device_t *dev)
@@ -130,8 +134,10 @@ static int open_lights(const struct hw_module_t *module, char const *name, struc
 		set_light = set_light_backlight;
 	else if (0 == strcmp(LIGHT_ID_BUTTONS, name))
         set_light = set_light_buttons;
+#ifdef USE_BLN
 	else if (0 == strcmp(LIGHT_ID_NOTIFICATIONS, name))
         set_light = set_light_notifications;
+#endif
 	else
 		return -EINVAL;
 
@@ -164,7 +170,7 @@ struct hw_module_t HAL_MODULE_INFO_SYM =
 	.version_major = 1,
 	.version_minor = 0,
 	.id = LIGHTS_HARDWARE_MODULE_ID,
-	.name = "MaclawLights",
-	.author = "MaclawStudio",
+	.name = "U8500 Lights Module",
+	.author = "VanirAOSP",
 	.methods = &lights_methods,
 };

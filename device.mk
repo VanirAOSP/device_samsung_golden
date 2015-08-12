@@ -24,11 +24,23 @@ PRODUCT_AAPT_PREF_CONFIG := hdpi
 # Hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
+# Inputs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+
+# Graphics
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/lib/egl/egl.cfg:system/lib/egl/egl.cfg
+
+# Media
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    $(LOCAL_PATH)/configs/etc/media_codecs.xml:system/etc/media_codecs.xml 
+
 # Wifi
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    $(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(LOCAL_PATH)/configs/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+    $(LOCAL_PATH)/configs/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+
 PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
@@ -36,13 +48,44 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     libnetcmdiface
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0
+    wifi.supplicant_scan_interval=150
+$(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
+
 # GPS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/sirfgps.conf:system/etc/sirfgps.conf \
+    $(LOCAL_PATH)/configs/etc/gps.conf:system/etc/gps.conf
+
 PRODUCT_PROPERTY_OVERRIDES += ro.gps.init=true
 
-# Open-source HALs
+# Bluetooth
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
+# RIL
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/ste_modem.sh:system/etc/ste_modem.sh \
+    $(LOCAL_PATH)/configs/etc/cspsa.conf:system/etc/cspsa.conf 
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.call_ring.multiple=false \
+    ro.telephony.sends_barcount=1 \
+    ro.telephony.default_network=0
+
+# Audio
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf \
+    $(LOCAL_PATH)/configs/etc/asound.conf:system/etc/asound.conf
+
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
+    audio.usb.default
+
+# Open-source HALs
+PRODUCT_PACKAGES += \
     lights.montblanc
 
 # Misc packages
@@ -100,6 +143,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml
+
+# Use U8500 opensource parts
+$(call inherit-product, hardware/samsung/u8500/ux500/Android.mk)
 
 # Get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/golden/golden-vendor.mk)
