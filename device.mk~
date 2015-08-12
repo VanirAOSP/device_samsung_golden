@@ -74,18 +74,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.sends_barcount=1 \
     ro.telephony.default_network=0
 
-# Audio
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/etc/audio_policy.conf:system/etc/audio_policy.conf \
-    $(LOCAL_PATH)/configs/etc/asound.conf:system/etc/asound.conf
-
+# Open-source HALs
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.r_submix.default \
-    audio.usb.default
-
-# Open-source HALs
-PRODUCT_PACKAGES += \
     lights.montblanc
 
 # Misc packages
@@ -143,9 +135,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml
-
-# Use U8500 opensource parts
-$(call inherit-product, hardware/samsung/u8500/ux500/Android.mk)
 
 # Get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/golden/golden-vendor.mk)

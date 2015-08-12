@@ -2,6 +2,9 @@
 rild.libpath=/system/lib/libsec-ril.so
 rild.libargs=-d /dev/ttyS0
 ro.telephony.ril_class=GoldenRIL
+# Wi-Fi
+wifi.interface=wlan0
+wifi.supplicant_scan_interval=150
 # Display
 ro.sf.lcd_density=240
 ro.opengles.version=131072

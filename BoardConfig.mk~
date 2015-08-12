@@ -21,9 +21,6 @@ TARGET_CPU_SMP := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := cortex-a9
-ARCH_ARM_HAVE_NEON := true
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 # Partitions
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1258291200
@@ -34,15 +31,14 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 
 # Board
-TARGET_BOOTLOADER_BOARD_NAME := DB8520H
+TARGET_BOOTLOADER_BOARD_NAME := montblanc
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
 # Platform 
 TARGET_BOARD_PLATFORM := montblanc
 BOARD_USES_STE_HARDWARE := true
-COMMON_GLOBAL_CFLAGS += -DSTE_HARDWARE -DSTE_SAMSUNG_HARDWARE
-COMMON_GLOBAL_CPPFLAGS += -DSTE_HARDWARE -DSTE_SAMSUNG_HARDWARE
+COMMON_GLOBAL_CFLAGS += -DSTE_HARDWARE -DSTE_SAMSUNG_HARDWARE 
 BOARD_LPM_BOOT_ARGUMENT_NAME := lpm_boot
 BOARD_LPM_BOOT_ARGUMENT_VALUE := 1
 
@@ -59,11 +55,10 @@ TARGET_NO_INITLOGO := true
 # Graphics
 USE_OPENGL_RENDERER := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := true
-BOARD_EGL_CFG := device/samsung/golden/configs/lib/egl/egl.cfg
+BOARD_EGL_CFG := vendor/samsung/golden/proprietary/lib/egl/egl.cfg
 COMMON_GLOBAL_CFLAGS += -DFORCE_SCREENSHOT_CPU_PATH -DWORKAROUND_BUG_10194508
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL
 COMMON_GLOBAL_CFLAGS += -DEGL_NEEDS_FNW
-BOARD_EGL_NEEDS_LEGACY_FB := true
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -95,6 +90,7 @@ WIFI_DRIVER_MODULE_NAME := "dhd"
 WIFI_DRIVER_MODULE_ARG := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_MODULE_AP_ARG := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 BOARD_NO_APSME_ATTR := true
+BOARD_NO_WIFI_HAL := true
 
 # Misc
 BOARD_RIL_CLASS := ../../../device/samsung/golden/ril/
