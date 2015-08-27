@@ -50,10 +50,9 @@ BOARD_LPM_BOOT_ARGUMENT_VALUE := 1
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000
-#TARGET_PREBUILT_KERNEL := device/samsung/golden/ramdisk/zImage
 BOARD_KERNEL_CMDLINE := "androidboot.selinux=permissive"
 TARGET_KERNEL_SOURCE := kernel/samsung/golden
-TARGET_KERNEL_CONFIG := cyanogenmod_golden_defconfig
+TARGET_KERNEL_CONFIG := F_kernel_defconfig
 TARGET_NO_INITLOGO := true
 
 # Graphics

@@ -98,10 +98,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     genfstab
 
-# Prebuilt kernel
-PRODUCT_COPY_FILES += \
-    device/samsung/golden/ramdisk/zImage:kernel
-
 # Initial ramdisk
 PRODUCT_COPY_FILES += \
     device/samsung/golden/ramdisk/init.samsunggolden.rc:root/init.samsunggolden.rc \
